@@ -1,0 +1,3 @@
+([('main',
+   '/Users/roopjeetsingh/PycharmProjects/mouseMover2/dist/main',
+   'EXECUTABLE')],)
