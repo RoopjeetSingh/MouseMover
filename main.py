@@ -36,7 +36,6 @@ class Button:
                  bd: int = 7, state: bool | str = True, disabled_image=None, disabled_color=None,
                  disabled_border_color=None, alpha=255, justify_text: str = "center", width=0, height=0,
                  underline=False, bold=False, italic=False, **kwargs):
-
         self.master = master
         self.image: pygame.Surface = image
         self.alpha = alpha
@@ -281,16 +280,19 @@ def stop():
 move = False
 root = pygame.display.set_mode((300, 50))
 clock = pygame.time.Clock()
+
 start_btn = Button(root, (0, 0), width=150, height=50, text="Start", command=start, bg=(0, 0, 0), fg=(255, 255, 255))
 stop_btn = Button(root, (150, 0), width=150, height=50, text="Stop", command=stop, bg=(0, 0, 0), fg=(255, 255, 255))
-button_lis = [start_btn, stop_btn]
+button_list = [start_btn, stop_btn]
+
 while True:
     root.fill("black")
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-        for i in button_lis:
+        for i in button_list:
             i.check_event(event)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
@@ -298,9 +300,11 @@ while True:
             if event.key == pygame.K_q:
                 move = False
 
-    for i in button_lis:
+    for i in button_list:
         i.update()
+
     if move:
         pyautogui.moveTo(random.randint(150, 1700), random.randint(150, 900), 1)
+        
     pygame.display.update()
-    clock.tick()
+    clock.tick(60)
